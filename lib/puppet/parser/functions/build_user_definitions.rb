@@ -4,7 +4,7 @@ module Puppet::Parser::Functions
   newfunction(:build_user_definitions, :type => :rvalue, :doc => "This function converts user table structure") do | args |
     voenv = args[0]
     def_pool_size = args[1].to_i()
-    def_name_offset = args[3].to_i()
+    def_name_offset = args[2].to_i()
     def_create_user = args[3]
 
     result = Hash.new

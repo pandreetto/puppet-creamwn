@@ -55,4 +55,40 @@ class creamwn inherits creamwn::params {
   Group <| tag == 'creamce::poolgroup' |> -> Notify["pool_checkpoint"]
   Notify["pool_checkpoint"] -> Pooluser <| |>
 
+
+  # ##################################################################################################
+  # Certificate Authorities
+  # ##################################################################################################
+
+  require fetchcrl
+
+  exec { "initial_fetch_crl":
+    command => "fetch-crl -l ${cacert_dir} -o ${cacert_dir} || exit 0",
+    path    => "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin",
+    require => Class['fetchcrl::config'],
+    notify  => Class['fetchcrl::service'],
+  }
+
+  file {"/etc/profile.d/grid-env.sh":
+    ensure  => present,
+    content => "GLITE_LOCATION_VAR=/var
+export GLITE_LOCATION_VAR
+GLITE_LOCATION=/usr
+export GLITE_LOCATION
+",
+    owner   => "root",
+    group   => "root",
+    mode    => '0755',
+  }  
+
+  file {"/etc/profile.d/grid-env.csh":
+    ensure  => present,
+    content => "setenv GLITE_LOCATION_VAR=/var
+setenv GLITE_LOCATION=/usr
+",
+    owner   => "root",
+    group   => "root",
+    mode    => '0644',
+  }
+
 }

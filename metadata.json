@@ -1,0 +1,24 @@
+{
+  "name": "infnpd-creamwn",
+  "version": "0.0.1",
+  "author": "blah-cream@lists.infn.it",
+  "summary": "This modules provides classes and definitions required to manage and properly configure a CREAM worker node.",
+  "license": "Apache 2.0",
+  "source": "https://github.com/pandreetto/puppet-creamwn",
+  "project_page": "https://github.com/pandreetto/puppet-creamwn",
+  "issues_url": "https://github.com/pandreetto/puppet-creamwn/issues",
+  "dependencies": [
+    {"name": "puppetlabs-stdlib", "version_requirement": ">= 1.0.0"},
+    {"name": "puppet-fetchcrl", "version_requirement": ">= 1.1.1"}
+  ],
+  "requirements": [
+    { "name": "puppet", "version_requirement": ">= 3.0.0" }
+  ],
+  "operatingsystem_support": [
+     {"operatingsystem": "CentOS", "operatingsystemrelease": [ "7.0.1406" ]},
+     {"operatingsystem": "Scientific", "operatingsystemrelease": [ "6.9" ]}
+  ],
+  "tags": [ "cream", "creamwn", "emi", "umd", "grid" ],
+  "description": "CREAM WN module"
+}
+

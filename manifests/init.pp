@@ -60,14 +60,21 @@ class creamwn inherits creamwn::params {
   # Certificate Authorities
   # ##################################################################################################
 
-  require fetchcrl
+  class { "fetchcrl":
+    runboot => false,
+    runcron => true,
+  }
 
   exec { "initial_fetch_crl":
-    command => "fetch-crl -l ${cacert_dir} -o ${cacert_dir} || exit 0",
-    path    => "/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin:/usr/local/sbin",
-    require => Class['fetchcrl::config'],
-    notify  => Class['fetchcrl::service'],
+    command => "/usr/sbin/fetch-crl -l ${cacert_dir} -o ${cacert_dir} || exit 0",
+    unless  => "/bin/ls ${cacert_dir}/*.r0",
   }
+
+  Class['fetchcrl'] -> Exec["initial_fetch_crl"]
+
+  # ##################################################################################################
+  # Other configurations
+  # ##################################################################################################
 
   file {"/etc/profile.d/grid-env.sh":
     ensure  => present,
@@ -89,6 +96,22 @@ setenv GLITE_LOCATION=/usr
     owner   => "root",
     group   => "root",
     mode    => '0644',
+  }
+
+  if $glue_2_1 {
+    # ldap required by nvidia-smi probe
+
+    group { "ldap":
+      ensure   => present,
+      gid      => 55,
+    }
+
+    user { "ldap":
+      ensure   => present,
+      gid      => 55,
+      require  => Group["ldap"],
+    }
+
   }
 
 }

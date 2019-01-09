@@ -12,7 +12,7 @@ class creamwn::params {
   $gridenvcfile        = lookup({'name' => 'creamce::gridenvfile::csh', 'default_value' => '/etc/profile.d/grid-env.csh'})
 
   $default_pool_size   = lookup({'name' => "creamce::default_pool_size", 'default_value' => 100})
-  $username_offset           = lookup({'name' => "creamce::username_offset", 'default_value' => 1})
+  $username_offset     = lookup({'name' => "creamce::username_offset", 'default_value' => 1})
   $create_user         = lookup({'name' => "creamce::create_user", 'default_value' => true})
 
   $cream_config_ssh    = lookup({'name' => "creamce::config_ssh", 'default_value' => false})
@@ -22,5 +22,6 @@ class creamwn::params {
   $cacert_dir          = lookup({'name' => 'creamce::cacert_dir', 'default_value' => '/etc/grid-security/certificates'})
   $crl_update_time     = lookup({'name' => 'creamce::crl_update_time', 'default_value' => 3600})
   $voenv               = lookup({'name' => 'creamce::vo_table', 'default_value' => {}})
+  $glue_2_1            = lookup({'name' => 'creamce::info::glue21_draft', 'default_value' => false})
 
 }

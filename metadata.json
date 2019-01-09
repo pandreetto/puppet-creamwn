@@ -1,6 +1,6 @@
 {
   "name": "infnpd-creamwn",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "author": "blah-cream@lists.infn.it",
   "summary": "This modules provides classes and definitions required to manage and properly configure a CREAM worker node.",
   "license": "Apache 2.0",
